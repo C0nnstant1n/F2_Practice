@@ -1,16 +1,31 @@
 import * as React from "react";
-import { connect } from "react-redux";
+import { useAppDispatch } from "../../hook";
+import { addTodo } from "../../store/todoSlice";
+import TodoList from "../TodoList";
 
-class Main extends React.Component {
-  render() {
-    console.log(this.props);
-    return <h1>Hi</h1>;
-  }
+// interface TodoItemsProps {
+//   id: string;
+//   title: string;
+//   completed: boolean;
+// }
+
+function Main() {
+  const dispatch = useAppDispatch();
+  const addTask = () => dispatch(addTodo("123"));
+
+  return (
+    <>
+      <h2>Test</h2>
+
+      <input type='text' onSubmit={(e) => dispatch(addTodo(e.target.value))} />
+
+      <button onClick={addTask}>Click me</button>
+
+      {/* <p>{completed}</p> */}
+
+      <TodoList />
+    </>
+  );
 }
 
-export default connect(
-  //mapStateToProps
-  (state) => ({}),
-  //mapDispatchToProps
-  (dispatch) => ({})
-)(Main);
+export default Main;
